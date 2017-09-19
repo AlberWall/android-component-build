@@ -1,0 +1,80 @@
+apply plugin: 'com.android.library'
+ apply plugin: 'open.gy.androidtools.componentplugin'
+
+android {
+    compileSdkVersion spCompileOptions['compileSdk']
+    buildToolsVersion spCompileOptions['buildTools']
+
+    defaultConfig {
+        minSdkVersion spCompileOptions['minSdk']
+        targetSdkVersion spCompileOptions['targetSdk']
+        versionCode 1
+        versionName "1.0"
+
+        testInstrumentationRunner "android.support.test.runner.AndroidJUnitRunner"
+
+    }
+    buildTypes {
+        release {
+            minifyEnabled false
+            proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
+        }
+    }
+}
+
+dependencies {
+    compile fileTree(dir: 'libs', include: ['*.jar'])
+    androidTestCompile('com.android.support.test.espresso:espresso-core:2.2.2', {
+        exclude group: 'com.android.support', module: 'support-annotations'
+    })
+    provided 'com.android.support:appcompat-v7:25.3.1'
+    testCompile 'junit:junit:4.12'
+}
+
+//task buildJar(type: Jar, dependsOn: ['assemble']) {
+//
+//    doLast {
+//        println "libcommon build jar finished"
+//    }
+//    destinationDir = file('../sdk/src/jarLibs/')
+//    appendix = "xx"
+//    baseName = "libcommon"
+//    version = 1.1
+//    // manifest信息
+//    def map = ['Version': 1.1,
+//               'Gradle': project.gradle.gradleVersion,
+//               'Vendor': 'spotmau',
+//               'Date': new Date().format("yyyy-MM-dd hh:mm:ss")
+//    ]
+//    manifest.attributes(map)
+//    from('build/intermediates/classes/release/')
+//    exclude('**/BuildConfig.class')
+//    exclude('**/BuildConfig\$*.class')
+//    exclude('**/R.class')
+//    exclude('**/R\$*.class')
+//    include('**/*.class')
+//}
+
+task xe {
+    doLast {
+        rootProject.testDep = "from lib Common"
+    }
+}
+
+componentConfigurations {
+    sdkProject project(spSdk.name)
+
+    jarDir spSdk.jarDir
+    aarDir spSdk.aarDir
+    jniDir spSdk.jniDir
+
+}
+componentConfigurations {
+
+    output 'jar'
+    appendix 'init'
+    baseName 'libcommon'
+    version '2.0'
+    vendor 'spotmau'
+
+}

@@ -1,0 +1,1 @@
+include ':app', ':sdk', ':libA', ':libB', ':libC', ':libCommon', ':buildSrc'

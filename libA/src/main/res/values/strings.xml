@@ -1,0 +1,4 @@
+<resources>
+    <string name="app_name">libA</string>
+    <string name="tv_test_liba">From lib A</string>
+</resources>

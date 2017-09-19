@@ -1,0 +1,46 @@
+apply plugin: 'groovy'
+apply plugin: 'maven'
+
+dependencies {
+    compile gradleApi()
+    compile localGroovy()
+}
+
+repositories {
+    mavenCentral()
+    jcenter()
+}
+
+//设置maven deployer
+uploadArchives {
+    repositories {
+        mavenDeployer {
+            //设置插件的GAV参数
+            pom.groupId = 'open.gy.androidtools.componentbuild'
+            pom.artifactId = 'component-build-plugin'
+            pom.version = '1.0.0'
+            //文件发布到下面目录
+            repository(url: uri('../release'))
+        }
+    }
+}
+
+apply plugin: 'com.novoda.bintray-release' // must be applied after your artifact generating plugin (eg. java / com.android.library)
+
+buildscript {
+    repositories {
+        jcenter()
+    }
+    dependencies {
+        classpath 'com.novoda:bintray-release:0.4.0'
+    }
+}
+
+publish {
+    userOrg = 'user'//用户名
+    groupId = 'open.gy.androidtools.componentbuild'//包名
+    artifactId = 'component-build-plugin'//类库名
+    publishVersion = '1.0.0'//版本号
+    desc = 'android component build plugin'//描述
+    website = ''//对应的github网址
+}

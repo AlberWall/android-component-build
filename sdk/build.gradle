@@ -1,0 +1,33 @@
+apply plugin: 'com.android.library'
+
+android {
+    compileSdkVersion spCompileOptions['compileSdk']
+    buildToolsVersion spCompileOptions['buildTools']
+
+    defaultConfig {
+        minSdkVersion spCompileOptions['minSdk']
+        targetSdkVersion spCompileOptions['targetSdk']
+    }
+
+    sourceSets.main {
+        jniLibs.srcDir 'src/jniLibs/armeabi'
+        jni.srcDirs = []
+        res.srcDirs 'src/res'
+        manifest.srcFile 'src/AndroidManifest.xml'
+    }
+
+    repositories.flatDir {
+        dirs 'src/aarLibs', 'src/jarLibs'
+    }
+
+    buildTypes {
+        release {
+            minifyEnabled false
+            proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
+        }
+    }
+}
+
+dependencies {
+
+}

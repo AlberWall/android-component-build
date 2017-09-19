@@ -1,0 +1,33 @@
+def disableDebugBuild() {
+    //project.tasks包含了所有的tasks，下面的findAll是寻找那些名字中带debug的Task。
+    //返回值保存到targetTasks容器中
+//    def targetTasks = project.tasks.findAll { task ->
+//        task.name.contains("Debug")
+//    }
+//    //对满足条件的task，设置它为disable。如此这般，这个Task就不会被执行
+//    targetTasks.each {
+//        println "disable debug task  :${it.name}"
+//        it.setEnabled false
+//    }
+}
+
+//对于android library编译，我会disable所有的debug编译任务
+ext {
+    spCompileOptions = [
+            compileSdk: 25,
+            buildTools: "25.0.3",
+            minSdk    : 19,
+            targetSdk : 25
+    ]
+
+    spSdk = [
+            name  : ':sdk',
+            jarDir: 'src/jarLibs',
+            aarDir: 'src/aarLibs',
+            jniDir: 'src/jniLibs/armeabi'
+    ]
+
+    taskDisableDebugBuild = this.&disableDebugBuild
+
+    testDep = null
+}

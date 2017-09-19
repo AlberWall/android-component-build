@@ -1,0 +1,61 @@
+apply plugin: 'com.android.library'
+ apply plugin: 'open.gy.androidtools.componentplugin'
+
+android {
+    compileSdkVersion spCompileOptions['compileSdk']
+    buildToolsVersion spCompileOptions['buildTools']
+
+    defaultConfig {
+        minSdkVersion spCompileOptions['minSdk']
+        targetSdkVersion spCompileOptions['targetSdk']
+        versionCode 1
+        versionName "1.0"
+
+        testInstrumentationRunner "android.support.test.runner.AndroidJUnitRunner"
+
+    }
+    buildTypes {
+        release {
+            minifyEnabled false
+            proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
+        }
+    }
+}
+
+dependencies {
+    compile fileTree(dir: 'libs', include: ['*.jar'])
+    androidTestCompile('com.android.support.test.espresso:espresso-core:2.2.2', {
+        exclude group: 'com.android.support', module: 'support-annotations'
+    })
+    provided 'com.android.support:appcompat-v7:25.3.1'
+    testCompile 'junit:junit:4.12'
+}
+
+componentConfigurations {
+    sdkProject project(spSdk.name)
+
+    jarDir spSdk.jarDir
+    aarDir spSdk.aarDir
+    jniDir spSdk.jniDir
+
+}
+
+def projectName = project.name
+componentConfigurations {
+
+    output 'aar'
+    appendix 'init'
+    baseName 'libb'
+    version '1.0'
+    vendor 'spotmau'
+    dependencies {
+        println "deps config ${projectName}"
+        compile project(':libC')
+
+    }
+
+}
+
+afterEvaluate {
+    taskDisableDebugBuild()
+}
