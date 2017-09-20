@@ -1,5 +1,5 @@
 apply plugin: 'com.android.library'
- apply plugin: 'open.gy.androidtools.componentplugin'
+apply plugin: 'open.gy.androidtools.componentplugin'
 
 android {
     compileSdkVersion spCompileOptions['compileSdk']
@@ -30,6 +30,7 @@ dependencies {
     compile 'com.android.support:appcompat-v7:25.3.1'
     testCompile 'junit:junit:4.12'
 }
+
 componentConfigurations {
     sdkProject project(spSdk.name)
 
@@ -38,18 +39,16 @@ componentConfigurations {
     jniDir spSdk.jniDir
 
 }
-def projectName = project.name
 
 componentConfigurations {
 
     output 'jar'
-    appendix 'init'
+    appendix 'xyz'
     baseName 'libc'
     version '1.0'
-    vendor 'spotmau'
+    vendor 'vendor'
     dependencies {
-        println "deps config ${projectName}"
-        compile project(':libCommon')
+        provided project(':libCommon')
 
     }
 

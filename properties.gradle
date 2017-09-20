@@ -28,6 +28,4 @@ ext {
     ]
 
     taskDisableDebugBuild = this.&disableDebugBuild
-
-    testDep = null
 }

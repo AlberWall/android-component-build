@@ -25,15 +25,11 @@ allprojects {
         jcenter()
     }
 }
-ext.testDep = null
+
 subprojects {
     apply from: rootProject.getRootDir().getAbsolutePath() + '/properties.gradle'
 }
 
 task clean(type: Delete) {
     delete rootProject.buildDir
-}
-
-ext {
-    xx = 25
 }

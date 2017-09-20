@@ -1,5 +1,5 @@
 apply plugin: 'com.android.library'
- apply plugin: 'open.gy.androidtools.componentplugin'
+apply plugin: 'open.gy.androidtools.componentplugin'
 
 android {
     compileSdkVersion spCompileOptions['compileSdk']
@@ -34,61 +34,13 @@ dependencies {
 
 }
 
-task cleanJar(type: Delete) {
-    doLast {
-        println "clean output of ${project.name}"
-        delete '../sdk/src/jarLibs/liba-1.0.jar'
-    }
-}
-
-clean.dependsOn('cleanJar')
-
-task createJar(type: Copy) {
-    from('build/intermediates/bundles/default/')
-    into('../sdk/src/jarLibs/')
-    include('classes.jar')
-    rename('classes.jar', 'libA-1.0.jar')
-}
-
-task printAssemble() {
-    doLast {
-        print "finished assembel task ${project.name}"
-    }
-
-}
-
-printAssemble.dependsOn(['assemble'])
-
-task xxx(dependsOn: ':libCommon:xe') {
-    doLast {
-        println "test task depends = ${rootProject.testDep}"
-    }
-}
-
-task buildDependencies(type:Exec) {
-    workingDir '/Volumes/Secondary/workspace/me/ComponentizationDemo/libA/'
-    commandLine 'pwd'
-//    commandLine 'export', "JAVA_HOME=/Applications/Android Studio.app/Contents/jre/jdk/Contents/Home"
-//    commandLine 'echo', '$JAVA_HOME'
 //
-//    commandLine 'echo',"start build libcommon"
-//    commandLine '../gradlew', ' -p ../libCommon/ buildJar'
-//    commandLine 'echo', 'start build libA'
-//    commandLine '../gradlew', 'buildJar'
-
-
-//    //store the output instead of printing to the console:
-//    standardOutput = new ByteArrayOutputStream()
-//
-//    //extension method stopTomcat.output() can be used to obtain the output:
-//    ext.output = {
-//        return standardOutput.toString()
-//    }
-//
-//    doLast {
-//        println "err =${output}"
-//    }
-}
+//task createJar(type: Copy) {
+//    from('build/intermediates/bundles/default/')
+//    into('../sdk/src/jarLibs/')
+//    include('classes.jar')
+//    rename('classes.jar', 'libA-1.0.jar')
+//}
 
 componentConfigurations {
     sdkProject project(spSdk.name)
@@ -99,70 +51,23 @@ componentConfigurations {
 
 }
 
-def projectName = project.name
 componentConfigurations {
 
     output 'jar'
-    appendix 'init'
+    appendix 'xyz'
     baseName 'liba'
-    version '1.2'
-    vendor 'spotmau1'
+    version '1.0'
+    vendor 'verdor'
     dependencies {
-        println "deps config ${projectName}"
-        compile project(':libCommon')
-        compile project(':libB')
+        provided project(':libCommon')
+        provided project(':libB')
 
     }
 
 }
 
-//task buildJar(type: Jar, dependsOn: ['assemble', 'cleanJar', 'helloTask']) {
-//
-//    doLast {
-//        println "finish build jar ${project.name}"
-//    }
-//
-//    println "build jar of ${project.name}"
-//
-//
-//    destinationDir = file('../sdk/src/jarLibs/')
-//    appendix = ""
-//    baseName = "liba"
-//    version = 1.0
-//    // manifest信息
-//    def map = ['Version': 1.0,
-//               'Gradle' : project.gradle.gradleVersion,
-//               'Vendor' : '',
-//               'Date'   : new Date().getDateTimeString()
-//    ]
-//    manifest.attributes(map)
-//    from('build/intermediates/classes/release/')
-//    exclude('**/BuildConfig.class')
-//    exclude('**/BuildConfig\$*.class')
-//    exclude('**/R.class')
-//    exclude('**/R\$*.class')
-//    include('**/*.class')
-//}
-
-//buildJar.dependsOn(cleanJar, build, printAssemble)
-
-afterEvaluate {
-//    taskDisableDebugBuild()
-
-//    project.tasks.each {
-//        it.dependsOn(":libCommon:buildJar")
-//    }
-
-
-}
-
-
 println "project path =${project(":sdk").projectDir}"
 println "project projectDir =${project(":sdk").projectDir}"
 println "project buildDir =${project(":sdk").buildDir}"
-
-//for (d in project(":sdk").configurations.) {
-//    println "decpen= ${d.group}:${d.name}:${d.version}"
-//}
 println "project name =${project(":sdk").dependencies}"
 println "project name =${project(":sdk").name}"

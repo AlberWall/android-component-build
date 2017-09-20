@@ -1,5 +1,5 @@
 apply plugin: 'com.android.library'
- apply plugin: 'open.gy.androidtools.componentplugin'
+apply plugin: 'open.gy.androidtools.componentplugin'
 
 android {
     compileSdkVersion spCompileOptions['compileSdk']
@@ -31,36 +31,6 @@ dependencies {
     testCompile 'junit:junit:4.12'
 }
 
-//task buildJar(type: Jar, dependsOn: ['assemble']) {
-//
-//    doLast {
-//        println "libcommon build jar finished"
-//    }
-//    destinationDir = file('../sdk/src/jarLibs/')
-//    appendix = "xx"
-//    baseName = "libcommon"
-//    version = 1.1
-//    // manifest信息
-//    def map = ['Version': 1.1,
-//               'Gradle': project.gradle.gradleVersion,
-//               'Vendor': 'spotmau',
-//               'Date': new Date().format("yyyy-MM-dd hh:mm:ss")
-//    ]
-//    manifest.attributes(map)
-//    from('build/intermediates/classes/release/')
-//    exclude('**/BuildConfig.class')
-//    exclude('**/BuildConfig\$*.class')
-//    exclude('**/R.class')
-//    exclude('**/R\$*.class')
-//    include('**/*.class')
-//}
-
-task xe {
-    doLast {
-        rootProject.testDep = "from lib Common"
-    }
-}
-
 componentConfigurations {
     sdkProject project(spSdk.name)
 
@@ -72,9 +42,9 @@ componentConfigurations {
 componentConfigurations {
 
     output 'jar'
-    appendix 'init'
+    appendix 'xyz'
     baseName 'libcommon'
     version '2.0'
-    vendor 'spotmau'
+    vendor 'vendor'
 
 }

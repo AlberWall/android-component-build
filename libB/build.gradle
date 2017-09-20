@@ -1,5 +1,5 @@
 apply plugin: 'com.android.library'
- apply plugin: 'open.gy.androidtools.componentplugin'
+apply plugin: 'open.gy.androidtools.componentplugin'
 
 android {
     compileSdkVersion spCompileOptions['compileSdk']
@@ -44,13 +44,13 @@ def projectName = project.name
 componentConfigurations {
 
     output 'aar'
-    appendix 'init'
+    appendix 'xyz'
     baseName 'libb'
     version '1.0'
-    vendor 'spotmau'
+    vendor 'vendor'
     dependencies {
         println "deps config ${projectName}"
-        compile project(':libC')
+        provided project(':libC')
 
     }
 
