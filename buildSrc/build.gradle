@@ -18,7 +18,7 @@ uploadArchives {
             //设置插件的GAV参数
             pom.groupId = 'open.gy.androidtools.componentbuild'
             pom.artifactId = 'component-build-plugin'
-            pom.version = '1.0.0'
+            pom.version = '1.0.1'
             //文件发布到下面目录
             repository(url: uri('../release'))
         }
@@ -40,7 +40,7 @@ publish {
     userOrg = 'user'//用户名
     groupId = 'open.gy.androidtools.componentbuild'//包名
     artifactId = 'component-build-plugin'//类库名
-    publishVersion = '1.0.0'//版本号
+    publishVersion = '1.0.1'//版本号
     desc = 'android component build plugin'//描述
     website = ''//对应的github网址
 }

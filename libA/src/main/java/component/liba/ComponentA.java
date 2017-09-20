@@ -1,6 +1,7 @@
 package component.liba;
 
 import component.libcommon.Utils;
+import demo.lib.DemoLib;
 
 /**
  * Created by ws on 17/9/8.
@@ -9,6 +10,6 @@ import component.libcommon.Utils;
 public class ComponentA implements InterfaceA {
     @Override
     public String getName() {
-        return Utils.getUtilName("Component-A");
+        return DemoLib.getString() + "-" + Utils.getUtilName("Component-A");
     }
 }

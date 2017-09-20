@@ -16,8 +16,10 @@ android {
         manifest.srcFile 'src/AndroidManifest.xml'
     }
 
-    repositories.flatDir {
-        dirs 'src/aarLibs', 'src/jarLibs'
+    repositories {
+        flatDir {
+            dirs 'src/aarLibs', 'src/jarLibs'
+        }
     }
 
     buildTypes {

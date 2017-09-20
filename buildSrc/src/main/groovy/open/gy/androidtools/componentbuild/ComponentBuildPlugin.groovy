@@ -86,6 +86,19 @@ class ComponentBuildPlugin implements Plugin<Project> {
             exclude('**/R\$*.class')
             include('**/*.class')
 
+            doLast {
+                // Conventions:
+                // 1. copy compiled jars except provided jars and all types of aars,
+                // since aars is not the output type of buildLibJar task
+
+                // TODO: copy only compile jars
+                project.copy {
+                    from 'libs'
+                    include "*.jar"
+                    into cfg.getLibJarDirectory().absolutePath
+                }
+            }
+
         }
 
         def taskBuildComponent = project.task(TN_BUILD_COMPONENT) {
