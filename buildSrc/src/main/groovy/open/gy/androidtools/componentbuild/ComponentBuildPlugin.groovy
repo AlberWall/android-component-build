@@ -7,10 +7,10 @@ import org.gradle.api.tasks.bundling.Jar
 
 class ComponentBuildPlugin implements Plugin<Project> {
     // Task Name
-    public static final String TN_ASSEMBLE_COMPONENT = "assembleComponent"
-    public static final String TN_BUILD_COMPONENT = "buildComponent"
-    public static final String TN_BUILD_JAR = "buildLibJar"
-    public static final String TN_BUILD_AAR = "buildLibAAR"
+    public static final String TN_ASSEMBLE_COMPONENT = 'assembleComponentWith'
+    public static final String TN_BUILD_COMPONENT = 'buildComponentWith'
+    public static final String TN_BUILD_JAR = 'buildLibJar'
+    public static final String TN_BUILD_AAR = 'buildLibAAR'
     public static final String TN_MAKE_DEPENDENCY_CHAIN = 'makeComponentDependencyChain'
 
     // Extension Name
@@ -33,7 +33,7 @@ class ComponentBuildPlugin implements Plugin<Project> {
             }
         }
 
-        project.task(TN_ASSEMBLE_COMPONENT) {
+        project.task(TN_ASSEMBLE_COMPONENT + project.name) {
             doLast {
                 List<Project> dependencyChain = cfg.dependencyHandler.dependencyChain(false)
                 for (Project pj in dependencyChain) {
@@ -54,7 +54,8 @@ class ComponentBuildPlugin implements Plugin<Project> {
                     from 'build/outputs/aar'
                     include project.name + "-release.aar"
                     into cfg.getLibAarDirectory().absolutePath
-                    rename(project.name + "-release.aar", cfg.baseName + "-" + cfg.appendix + "-" + cfg.version + "-release.aar")
+
+                    rename(project.name + "-release.aar", cfg.getAarFileName())
                 }
             }
         }
@@ -101,7 +102,7 @@ class ComponentBuildPlugin implements Plugin<Project> {
 
         }
 
-        def taskBuildComponent = project.task(TN_BUILD_COMPONENT) {
+        def taskBuildComponent = project.task(TN_BUILD_COMPONENT + project.name) {
             doLast {
                 println "finish build lib: ${project.name}"
             }
@@ -144,8 +145,8 @@ class ComponentBuildPlugin implements Plugin<Project> {
 
     private void execBuildComponentInWin(Project project) {
         project.exec {
-            workingDir project.projectDir
-            commandLine '../gradlew.bat', TN_BUILD_COMPONENT
+            workingDir project.rootProject.projectDir
+            commandLine 'gradlew.bat', '-p', "${project.name}", TN_BUILD_COMPONENT
         }
     }
 

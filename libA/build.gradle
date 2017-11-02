@@ -54,9 +54,7 @@ componentConfigurations {
 componentConfigurations {
 
     output 'jar'
-    appendix 'xyz'
     baseName 'liba'
-    version '1.0'
     vendor 'verdor'
     dependencies {
         provided project(':libCommon')

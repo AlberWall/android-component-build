@@ -15,7 +15,7 @@ buildscript {
         // in the individual module build.gradle files
 
         //component-build-plugin
-        classpath 'open.gy.androidtools.componentbuild:component-build-plugin:1.0.0'
+        classpath 'open.gy.androidtools.componentbuild:component-build-plugin:1.0.5'
     }
 }
 

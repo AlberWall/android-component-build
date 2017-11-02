@@ -56,6 +56,20 @@ class ComponentConfig {
         return new File(sdkProject.projectDir.getAbsolutePath(), aarDir)
     }
 
+    def getAarFileName() {
+
+        def fileName = baseName;
+        if (null != appendix && !appendix.isEmpty()) {
+            fileName += "-" + appendix
+        }
+
+        if (null != version && !version.isEmpty()) {
+            fileName += "-" + version
+        }
+
+        return fileName + "-release.aar"
+    }
+
     def getLibPath() {
         libDir.absolutePath
     }
