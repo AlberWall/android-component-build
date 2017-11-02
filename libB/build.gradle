@@ -44,8 +44,8 @@ def projectName = project.name
 componentConfigurations {
 
     output 'aar'
-    appendix 'xyz'
-    baseName 'libb'
+    appendix 'b'
+    baseName 'lib'
     version '1.0'
     vendor 'vendor'
     dependencies {
